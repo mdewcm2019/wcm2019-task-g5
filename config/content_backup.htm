@@ -1,11 +1,338 @@
 <h1>簡介</h1>
 <p>CMSimfly (<a href="https://github.com/chiamingyen/cmsimfly">https://github.com/chiamingyen/cmsimfly)</a> 是一套簡單的網際內容管理系統, 採用 Flask 網際框架, 以 Beautifulsoup 解讀分頁內容.</p>
-<p><img alt="" height="471" src="/images/gocycle4.png" width="587"/></p><h1>目錄結構</h1>
+<p><img alt="" height="471" src="/images/gocycle4.png" width="587"/></p>
+<h1>GAME1</h1>
+<p>game1</p>
+<p>The game of craps has the following rules:</p>
+<p>課本章節: <a href="https://link.springer.com/chapter/10.1007/978-1-4842-4155-4_2">https://link.springer.com/chapter/10.1007/978-1-4842-4155-4_2</a> </p>
+<p>The player throws a pair of dice. The sum of the two top faces is what matters so a 1<br/>and a 3 is the same as 2 and 2. The sum of two 6-sided dice can be any number from 2 to<br/>12. If the player throws a 7 or 11 on the first throw, the player wins. If the player throws a 2, 3, or 12, the player loses. For any other result (4, 5, 6, 8, 9, 10), this result is recorded as what is called the player’s point and a follow-up throw is required. On follow-up throws, a throw of 7 loses and a throw of the player’s point wins. For anything else, the game continues with the follow-up throw rules.</p>
+<p><button onclick="myFunction()">Try it</button></p>
+<p id="demo"></p>
+<script>// <![CDATA[
+function myFunction() {
+  document.getElementById("demo").innerHTML = Math.floor(Math.random()*10);
+}
+// ]]></script>
+<p>上述程式原始碼:</p>
+<pre class="brush:html;auto-links:false;toolbar:false" contenteditable="false">&lt;p&gt;&lt;button onclick="myFunction()"&gt;Try it&lt;/button&gt;&lt;/p&gt;
+&lt;p id="demo"&gt;&lt;/p&gt;
+&lt;script&gt;// &lt;![CDATA[
+function myFunction() {
+  document.getElementById("demo").innerHTML = Math.floor(Math.random()*10);
+}
+// ]]&gt;&lt;/script&gt;</pre>
+<script type="text/javascript">// <![CDATA[
+var cwidth = 400;
+	var cheight = 300;
+	var dicex = 50;
+	var dicey = 50;
+	var dicewidth = 100;
+	var diceheight = 100;
+	var dotrad = 6;
+	var ctx;
+	var dx;
+	var dy;
+	var firstturn = true;
+	var point;
+function throwdice() {
+	var sum;
+	var ch = 1+Math.floor(Math.random()*6);
+	sum = ch;
+	dx = dicex;
+	dy = dicey;
+	drawface(ch);
+	dx = dicex + 150;
+	ch=1 + Math.floor(Math.random()*6);
+	sum += ch;
+	drawface(ch);
+	if (firstturn) {
+		switch(sum) {
+			case 7:
+			case 11:
+			  document.f.outcome.value="You win!";
+			  break;
+			case 2:
+			case 3:
+			case 12:
+			  document.f.outcome.value="You lose!";
+			  break;
+			default:
+			  point = sum;
+			  document.f.pv.value=point;
+			  firstturn = false;
+			  document.f.stage.value="Need follow-up throw.";
+			  document.f.outcome.value="   ";
+		}
+	}
+	else {
+		switch(sum) {
+		case point:
+		   document.f.outcome.value="You win!";
+		   document.f.stage.value="Back to first throw.";
+		   document.f.pv.value=" ";
+		   firstturn = true;
+		   break;
+		case 7:
+		   document.f.outcome.value="You lose!";
+		   document.f.stage.value="Back to first throw.";
+		   document.f.pv.value=" ";
+		   firstturn = true;
+		}
+		   	}
+}
+function drawface(n) {
+  ctx = document.getElementById('canvas').getContext('2d');  
+  ctx.lineWidth = 5;
+  ctx.clearRect(dx,dy,dicewidth,diceheight);
+  ctx.strokeRect(dx,dy,dicewidth,diceheight)
+  var dotx;
+  var doty;
+  ctx.fillStyle = "#009966";
+	switch(n) {
+		case 1:
+		 draw1();
+		 break;
+		case 2:
+		 draw2();
+		 break;
+		case 3:
+		 draw2();
+		 draw1();
+		 break;
+		case 4:
+		 draw4();
+		 break;
+		case 5:
+		 draw4();
+		 draw1();
+		 break;
+		case 6:
+		 draw4();
+		 draw2mid();
+		 break;
+		
+	}
+}
+function draw1() {
+	var dotx;
+	var doty;
+	ctx.beginPath();
+	dotx = dx + .5*dicewidth;
+	doty = dy + .5*diceheight;
+	ctx.arc(dotx,doty,dotrad,0,Math.PI*2,true);
+	ctx.closePath();
+	ctx.fill();
+}
+function draw2() {
+	var dotx;
+	var doty;
+	ctx.beginPath();
+	dotx = dx + 3*dotrad;
+	doty = dy + 3*dotrad;
+	ctx.arc(dotx,doty,dotrad,0,Math.PI*2,true);
+	dotx = dx+dicewidth-3*dotrad;
+	doty = dy+diceheight-3*dotrad;
+	ctx.arc(dotx,doty,dotrad,0,Math.PI*2,true);
+	ctx.closePath();
+	ctx.fill();
+}
+function draw4() {
+	var dotx;
+	var doty;
+	ctx.beginPath();
+	dotx = dx + 3*dotrad;
+	doty = dy + 3*dotrad;
+	ctx.arc(dotx,doty,dotrad,0,Math.PI*2,true);
+	dotx = dx+dicewidth-3*dotrad;
+	doty = dy+diceheight-3*dotrad;
+	ctx.arc(dotx,doty,dotrad,0,Math.PI*2,true);
+	ctx.closePath();
+	ctx.fill();
+	ctx.beginPath();
+	dotx = dx + 3*dotrad;
+	doty = dy + diceheight-3*dotrad;  //no change
+	ctx.arc(dotx,doty,dotrad,0,Math.PI*2,true);
+	dotx = dx+dicewidth-3*dotrad;
+	doty = dy+ 3*dotrad;
+	ctx.arc(dotx,doty,dotrad,0,Math.PI*2,true);
+	ctx.closePath();
+	ctx.fill();	
+}
+function draw2mid() {
+	var dotx;
+	var doty;
+	ctx.beginPath();
+	dotx = dx + 3*dotrad;
+	doty = dy + .5*diceheight;
+	ctx.arc(dotx,doty,dotrad,0,Math.PI*2,true);
+	dotx = dx+dicewidth-3*dotrad;
+	doty = dy + .5*diceheight; //no change
+	ctx.arc(dotx,doty,dotrad,0,Math.PI*2,true);
+	ctx.closePath();
+	ctx.fill();
+}
+// ]]></script>
+<p><canvas height="300" id="canvas" width="400"> Your browser doesn't support the HTML5 element canvas. </canvas> <br/> <button onclick="throwdice();">Throw dice </button></p>
+<form id="f" name="f">Stage: <input name="stage" type="text" value="First Throw"/> Point: <input name="pv" type="text" value="   "/> Outcome: <input name="outcome" type="text" value="     "/></form>
+<p>上述程式原始碼:</p>
+<pre class="brush:html;auto-links:false;toolbar:false" contenteditable="false">&lt;script type="text/javascript"&gt;// &lt;![CDATA[
+var cwidth = 400;
+	var cheight = 300;
+	var dicex = 50;
+	var dicey = 50;
+	var dicewidth = 100;
+	var diceheight = 100;
+	var dotrad = 6;
+	var ctx;
+	var dx;
+	var dy;
+	var firstturn = true;
+	var point;
+function throwdice() {
+	var sum;
+	var ch = 1+Math.floor(Math.random()*6);
+	sum = ch;
+	dx = dicex;
+	dy = dicey;
+	drawface(ch);
+	dx = dicex + 150;
+	ch=1 + Math.floor(Math.random()*6);
+	sum += ch;
+	drawface(ch);
+	if (firstturn) {
+		switch(sum) {
+			case 7:
+			case 11:
+			  document.f.outcome.value="You win!";
+			  break;
+			case 2:
+			case 3:
+			case 12:
+			  document.f.outcome.value="You lose!";
+			  break;
+			default:
+			  point = sum;
+			  document.f.pv.value=point;
+			  firstturn = false;
+			  document.f.stage.value="Need follow-up throw.";
+			  document.f.outcome.value="   ";
+		}
+	}
+	else {
+		switch(sum) {
+		case point:
+		   document.f.outcome.value="You win!";
+		   document.f.stage.value="Back to first throw.";
+		   document.f.pv.value=" ";
+		   firstturn = true;
+		   break;
+		case 7:
+		   document.f.outcome.value="You lose!";
+		   document.f.stage.value="Back to first throw.";
+		   document.f.pv.value=" ";
+		   firstturn = true;
+		}
+		   	}
+}
+function drawface(n) {
+  ctx = document.getElementById('canvas').getContext('2d');  
+  ctx.lineWidth = 5;
+  ctx.clearRect(dx,dy,dicewidth,diceheight);
+  ctx.strokeRect(dx,dy,dicewidth,diceheight)
+  var dotx;
+  var doty;
+  ctx.fillStyle = "#009966";
+	switch(n) {
+		case 1:
+		 draw1();
+		 break;
+		case 2:
+		 draw2();
+		 break;
+		case 3:
+		 draw2();
+		 draw1();
+		 break;
+		case 4:
+		 draw4();
+		 break;
+		case 5:
+		 draw4();
+		 draw1();
+		 break;
+		case 6:
+		 draw4();
+		 draw2mid();
+		 break;
+		
+	}
+}
+function draw1() {
+	var dotx;
+	var doty;
+	ctx.beginPath();
+	dotx = dx + .5*dicewidth;
+	doty = dy + .5*diceheight;
+	ctx.arc(dotx,doty,dotrad,0,Math.PI*2,true);
+	ctx.closePath();
+	ctx.fill();
+}
+function draw2() {
+	var dotx;
+	var doty;
+	ctx.beginPath();
+	dotx = dx + 3*dotrad;
+	doty = dy + 3*dotrad;
+	ctx.arc(dotx,doty,dotrad,0,Math.PI*2,true);
+	dotx = dx+dicewidth-3*dotrad;
+	doty = dy+diceheight-3*dotrad;
+	ctx.arc(dotx,doty,dotrad,0,Math.PI*2,true);
+	ctx.closePath();
+	ctx.fill();
+}
+function draw4() {
+	var dotx;
+	var doty;
+	ctx.beginPath();
+	dotx = dx + 3*dotrad;
+	doty = dy + 3*dotrad;
+	ctx.arc(dotx,doty,dotrad,0,Math.PI*2,true);
+	dotx = dx+dicewidth-3*dotrad;
+	doty = dy+diceheight-3*dotrad;
+	ctx.arc(dotx,doty,dotrad,0,Math.PI*2,true);
+	ctx.closePath();
+	ctx.fill();
+	ctx.beginPath();
+	dotx = dx + 3*dotrad;
+	doty = dy + diceheight-3*dotrad;  //no change
+	ctx.arc(dotx,doty,dotrad,0,Math.PI*2,true);
+	dotx = dx+dicewidth-3*dotrad;
+	doty = dy+ 3*dotrad;
+	ctx.arc(dotx,doty,dotrad,0,Math.PI*2,true);
+	ctx.closePath();
+	ctx.fill();	
+}
+function draw2mid() {
+	var dotx;
+	var doty;
+	ctx.beginPath();
+	dotx = dx + 3*dotrad;
+	doty = dy + .5*diceheight;
+	ctx.arc(dotx,doty,dotrad,0,Math.PI*2,true);
+	dotx = dx+dicewidth-3*dotrad;
+	doty = dy + .5*diceheight; //no change
+	ctx.arc(dotx,doty,dotrad,0,Math.PI*2,true);
+	ctx.closePath();
+	ctx.fill();
+}
+// ]]&gt;&lt;/script&gt;
+&lt;p&gt;&lt;canvas height="300" id="canvas" width="400"&gt; Your browser doesn't support the HTML5 element canvas. &lt;/canvas&gt; &lt;br&gt; &lt;button onclick="throwdice();"&gt;Throw dice &lt;/button&gt;&lt;/p&gt;
+&lt;form id="f" name="f"&gt;Stage: &lt;input name="stage" type="text" value="First Throw"&gt; Point: &lt;input name="pv" type="text" value="   "&gt; Outcome: &lt;input name="outcome" type="text" value="     "&gt;&lt;/form&gt;</pre>
+<p></p><h1>目錄結構</h1>
 <p>CMSimfly 的動態系統採用 Python3 + Flask 建構, 並且利用 Beatifulsoup 解讀位於 contig 目錄中的 content.htm 超文件檔案.</p>
 <p>content.htm 檔案可以透過動態系統中的 generate_pages 功能, 將超文件轉為位於 content 目錄中的個別頁面檔案.</p>
-<p>動態系統與靜態系統則共用 downloads, images, static 等目錄, 其中 downloads 目錄存放在動態系統上傳的文件檔, 而 images 目錄則存放動態系統所上傳的影像檔案, 包括 jpg, png 與 git 等格式圖檔.</p>
-<p>static 目錄則存放在動態與靜態系統所需要的 Javascript 或 Brython 程式檔.</p>
-<h1>頁面編輯</h1>
+<p>動態系統與靜態系統則共用 downloads, images, static 等目錄, 其中 downloads 目錄存放在動態系統上傳的文件檔, 而 images 目錄則存放動態系統所上傳的影像檔案, 包括 jpg, png 與 gif 等格式圖檔.</p>
+<p>static 目錄則存放在動態與靜態系統所需要的 Javascript 或 Brython 程式檔.</p><h1>頁面編輯</h1>
 <p>CMSimfly 動態系統的網際編輯器採用 <a href="https://www.tiny.cloud/">TinyMCE4</a>, 可以放入一般超文件,  納入圖檔, 嵌入影片連結, 並且加入帶有行數的原始碼.</p>
 <p>透過 File Upload 功能, 可以一次上傳多個檔案,  存入 downloads 目錄中儲存, 之後各頁面可以引入對應連結.</p>
 <p>而圖檔的上傳與引用與一般檔案類似, 但上傳後存入 images 目錄中.</p>
