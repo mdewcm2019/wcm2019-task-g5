@@ -1,5 +1,3 @@
-<p></p>
-<p></p>
 <h1>網路連線設定</h1>
 <p><span>了解機械設計系電腦輔助設計室電腦的網路設定, 其中包括 IPv4 網路與 IPv6 網路設定.</span><br/><br/><span>正常情況下, 電腦輔助設計室中的 64 台電腦透過 IPv4 協定下的 DHCP 與 NAT 上網, 各電腦以 DHCP client 取得 192.168.1.* 的網路位址, 然後以 NAT 的一組外部 IP 上網, 通常必須設定 Proxy Server 為 http://proxy.kmol.info:3128 後上網會比較順暢, 但若 8 台 Proxy Servers 無法正常運作時, 則取消 Proxy Server 的設定.</span><br/><br/><span>瀏覽器代理主機設定</span><br/><br/><span>了解如何設定 Google Chrome 與 Firefox 瀏覽器的代理主機設定.</span><br/><br/><span>申請 Github 帳號</span><br/><br/><span>利用 Gmail 帳號申請 Github 帳號, 申請後利用電子郵箱收信進行確認後, 就可以在 Github 上建立倉儲.</span></p>
 <h1>配置可攜程式環境</h1>
@@ -17,7 +15,7 @@
 <p><span>虛擬主機下的類 Github 網站</span><br/><br/><span>如何利用<span> </span></span><a href="https://www.fossil-scm.org/">Fossil SCM</a><span>, 在<span> </span></span><a href="https://www.virtualbox.org/">Virtualbox</a><span><span> </span>中的<span> </span></span><a href="https://drive.google.com/open?id=1yjWQ5e6AGaio2ZvclONKEwIfSMtY2gSz">Ubuntu 18.04-2</a><span> (8.5 GB) 建立類似 Github 的系統, 可以放入 CMSimfly 的靜態網頁，</span></p>
 <p>virtual box 設定<br/><br/><span>Virtualbox File 下拉式功能表下的 Preferences 屬於全系統的偏好設定, 而與各虛擬主機對應的 Settings 則僅與該對應的虛擬主機有關.</span><br/><br/><span>Virtualbox 虛擬主機網路設定</span></p>
 <p><span>Not Attached<br/><br/><span>當使用者需要模擬虛擬主機的網路卡連接線被拔除的情況時, 可將該虛擬主機的網路卡以 Not Attached 模式設定.</span><br/><br/><span>NAT</span><br/><span><br/></span><span></span><span>當使用者只需要讓虛擬主機能夠上網, 下載檔案或登入電子郵箱時, 可以將虛擬主機的網路卡以 NAT 模式設定. 在 NAT 模式下, 只有 ping 能夠運作, tracert 與其他與 ICMP 、VPN 或 PPTP 等協定對應的功能都將會失效.</span><br/><br/><span>NAT  Network</span><br/><br/><span>NAT Network 與 NAT 類似, 但使用者可以透過 File-Preferences-Network 新增多個 NAT Network, 並選擇所要使用的網段與 DHCP 或是否支援 IPv6 等設定.</span><br/><br/><span>Bridged Adapter</span><br/><span><br/></span><span></span><span>當使用者需要利用虛擬主機建立與 Host 位階相同的網路模式時, 可以將虛擬主機的網卡設訂為 Bridged Adapter.</span><br/><br/><span>Internal Network</span><br/><br/><span>當使用者需要讓虛擬主機設定為 </span><a href="https://en.wikipedia.org/wiki/Software-defined_networking">https://en.wikipedia.org/wiki/Software-defined_networking</a><span> 時, 可以將網路卡設為可透過軟體調控的網路模式.</span><br/><br/><span>Host-only Adapter</span><br/><span><br/></span><span></span><span>當使用者只需要讓虛擬主機與 Host 電腦連線時, 可以將網卡設為 Host-only Adapter, 此一模式的使用時機可以在虛擬主機中配置 WWW 伺服器、應用程式伺服器、Fossil SCM 伺服器, 然後透過 Host 上的瀏覽器進行連線測試, 或者在虛擬主機上安裝特定軟體套件的認證主機, 以便讓 Host 中的軟體套件透過虛擬主機執行授權認證.</span></span></p>
-<h1>期中報告</h1>
+<h3><span><span>Virtualbox</span></span></h3><h1>期中報告</h1>
 <p>40723122 施東勝 <a href="https://www.youtube.com/watch?v=hEIMfQZy904" rel="nofollow">https://www.youtube.com/watch?v=hEIMfQZy904</a></p>
 <p>40723130 陳彥旭 <a href="https://youtu.be/kcYoyJfUzwQ" rel="nofollow">https://youtu.be/kcYoyJfUzwQ</a></p>
 <p>40723132 陳乾豐 <a href="https://youtu.be/vuB8cI9bfqs" rel="nofollow">https://youtu.be/vuB8cI9bfqs</a></p>
@@ -297,7 +295,8 @@ brython({debug:1, pythonpath:['./../data/py']});
 <p><canvas height="600" id="onegear" width="800"></canvas></p>
 <div height="20" id="onegear_div" width="800"></div>
 <p><input id="n1" type="text" value="13"/><br/> <input id="n2" type="text" value="11"/><br/> <input id="n3" type="text" value="17"/><br/> <button id="button">Set Number of Gears</button></p>
-<p><br/><br/></p>
+<h1>Ubuntu操作步驟</h1>
+<p><span>利用 Virtualbox 建立虛擬 Ubuntu 18.04 網際內容管理系統伺服主機:</span><br/><span><br/></span><span>1. 安裝最新版的 Virtualbox</span><br/><span>2. 建立 Ubuntu 18.04 虛擬主機</span><br/><span>3. 以網路卡橋接啟動 Ubuntu 伺服器</span><br/><span>4. 以 sudo apt install nginx 安裝 nginx WWW 伺服器</span><br/><span>5. 以 ifconfig 查 Ubuntu 伺服器的 IP, 測試 nginx 伺服器是否可以連線</span><br/><span>6. 以 Windows 10  下的 Filezilla client, 將編輯好的 nginx 設定檔案送到 Ubuntu</span><br/><span>7. 利用 Ubuntu 指令將設定檔案搬至設定位置後, 以 /etc/init.d/nginx restart 重新啟動 nginx</span><br/><span>8. 在 Ubuntu 中以 sudo apt install uwsgi 安裝 uwsgi</span><br/><span>9. 在 Windows 10 編輯 uwsgi 與 nginx 所需的設定檔案, 完成後以 filezilla 送至 Ubuntu.</span><br/><span>10. 將 CMSimfly 程式碼送到 Ubuntu 伺服器中對應目錄後.</span><br/><span>11. 在 Ubuntu 建立 cmsimfly 服務, 並設定隨機啟動.</span><br/><span>12. 完成後, 在 Windows 10 以瀏覽器連線至 CMSimfly, 確認動態網頁與靜態網頁可以在虛擬主機中正常啟動.</span><br/><br/></p>
 <script type="text/python3">// <![CDATA[
 from browser import document as doc
 from browser import html
